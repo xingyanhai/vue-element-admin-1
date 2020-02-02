@@ -1,16 +1,25 @@
 <template>
-  <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView:needTagsView}" class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
-        <tags-view v-if="needTagsView" />
+  <div>
+    <div class="blank"></div>
+    <div class="header">
+      <div class="title">
+        fsf
       </div>
-      <app-main />
-      <right-panel v-if="showSettings">
-        <settings />
-      </right-panel>
+      <DnMainHeader :list="headerList" defaultActive="1"></DnMainHeader>
+    </div>
+    <div :class="classObj" class="app-wrapper">
+      <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+      <sidebar class="sidebar-container" />
+      <div :class="{hasTagsView:needTagsView}" class="main-container">
+        <div :class="{'fixed-header':fixedHeader}">
+          <navbar />
+          <tags-view v-if="needTagsView" />
+        </div>
+        <app-main />
+        <right-panel v-if="showSettings">
+          <settings />
+        </right-panel>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +27,7 @@
 <script>
 import RightPanel from '@/components/RightPanel'
 import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
+import DnMainHeader from '../components/header/index'
 import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 
@@ -29,7 +39,8 @@ export default {
     RightPanel,
     Settings,
     Sidebar,
-    TagsView
+    TagsView,
+    DnMainHeader
   },
   mixins: [ResizeMixin],
   computed: {
@@ -47,6 +58,26 @@ export default {
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
       }
+    },
+    headerList() {
+      return [
+        {
+          label: 'xx',
+          value: '1'
+        },
+        {
+          label: 'xx',
+          value: '2'
+        },
+        {
+          label: 'xx',
+          value: '3'
+        },
+        {
+          label: 'xx',
+          value: '4'
+        }
+      ]
     }
   },
   methods: {
@@ -66,7 +97,9 @@ export default {
     position: relative;
     height: 100%;
     width: 100%;
-
+    >>>.sidebar-container{
+      top: 100px;
+    }
     &.mobile.openSidebar {
       position: fixed;
       top: 0;
@@ -100,3 +133,24 @@ export default {
     width: 100%;
   }
 </style>
+<style lang="stylus" scoped>
+  $height = 80px
+  .blank
+    height $height
+  .header
+    position fixed
+    top 0
+    left 0
+    right 0
+    width 100%
+    z-index 2000
+    .title
+      background-color #fff
+      height 30px
+    .nav
+      height 50px;
+  .app-wrapper
+    >>>.sidebar-container
+      top $height!important
+</style>
+

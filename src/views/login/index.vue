@@ -52,14 +52,6 @@
           <span>Username : admin</span>
           <span>Password : any</span>
         </div>
-        <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
-          <span>Password : any</span>
-        </div>
-
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          Or connect with
-        </el-button>
       </div>
     </el-form>
 
@@ -248,7 +240,7 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
+$bg:#889aa4;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
